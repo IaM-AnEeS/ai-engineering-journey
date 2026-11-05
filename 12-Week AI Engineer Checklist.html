@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12-Week AI Engineer Checklist</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f7f8;--card:#fff;--ink:#12212b;--mute:#5b6b76;--line:#d5dfe4;--acc:#0b6e6e;--acc2:#e0f1f0;--warn:#a3490b;--warnbg:#fdf0e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a20;--card:#15262e;--ink:#e6eef1;--mute:#93a6b0;--line:#27404b;--acc:#4fd1c5;--acc2:#16373a;--warn:#f0a868;--warnbg:#33261a}}
+:root[data-theme="dark"]{--bg:#0e1a20;--card:#15262e;--ink:#e6eef1;--mute:#93a6b0;--line:#27404b;--acc:#4fd1c5;--acc2:#16373a;--warn:#f0a868;--warnbg:#33261a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+h1{font:700 1.7rem/1.2 Georgia,"Times New Roman",serif;margin:8px 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:10px 0;z-index:2;border-bottom:1px solid var(--line)}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+.stat{display:flex;justify-content:space-between;font-size:.9rem;color:var(--mute);margin-top:6px}
+.rhythm{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:16px 0;font-size:.93rem}
+.rhythm b{color:var(--acc)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:12px 0}
+summary{cursor:pointer;padding:12px 14px;list-style:none;display:flex;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wk{font-weight:700;min-width:3.2rem;color:var(--acc)}
+.tt{flex:1}.tt small{display:block;color:var(--mute);font-weight:400}
+.cnt{font-size:.85rem;color:var(--mute);white-space:nowrap}
+.body{padding:2px 14px 14px;border-top:1px solid var(--line)}
+label{display:flex;gap:10px;padding:8px 0;cursor:pointer;align-items:flex-start}
+input[type=checkbox]{width:20px;height:20px;margin-top:2px;accent-color:var(--acc);flex:none}
+label.done span{color:var(--mute);text-decoration:line-through}
+.out{background:var(--acc2);border-radius:8px;padding:8px 10px;font-size:.92rem;margin-top:6px}
+.note{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:8px 10px;font-size:.9rem;margin-top:6px}
+.foot{margin-top:22px;font-size:.9rem;color:var(--mute)}
+button{font:inherit;background:none;border:1px solid var(--line);color:var(--mute);border-radius:8px;padding:6px 12px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<h1>12-Week AI Engineer Checklist</h1>
+<p class="sub">Oct 12 to Jan 3. Goal: three deployed projects and applications out the door.</p>
+<div class="top"><div class="bar"><i id="fill"></i></div><div class="stat"><span id="pct">0% done</span><span id="num"></span></div></div>
+<div class="rhythm"><b>Weekdays:</b> German 4:00–5:30 pm, gym, then <b>AI 8:30–10:30 pm</b>. <b>Weekends:</b> German 1.5 h, AI about 6 h. Build 70% of the time, watch 30%.</div>
+<div id="weeks"></div>
+<p class="foot">Ticks are saved in this browser only. <button id="reset">Reset all</button></p>
+</main>
+<script>
+var W=[
+{t:"Rebuild Python and Git",d:"Oct 12–18",k:[
+"Python refresh: functions, OOP, typing, virtual environments, async basics",
+"pandas and numpy: load, clean, group, plot a real CSV",
+"Set up GitHub and commit something every day",
+"Set up a clean project template: venv, .env, README, .gitignore"],o:"GitHub account with 5+ days of commits"},
+{t:"ML fundamentals and PyTorch intro",d:"Oct 19–25",k:[
+"ZTM: scikit-learn sections only (skip the rest)",
+"Concepts: overfitting, train/test split, precision/recall/F1",
+"Train and evaluate one model end to end in sklearn",
+"PyTorch basics: tensors, a small network, a training loop",
+"Write down in your own words: embeddings, transformer, attention"],o:"Mini-project with a README and metrics"},
+{t:"Finish Krish Naik and start the RAG project",d:"Oct 26–Nov 1",k:[
+"Finish the remaining 31% of the Generative AI course",
+"Pick Project 1 documents (e.g. FBR tax guides or university policies)",
+"Ingest, chunk and embed them into a vector database (Chroma or FAISS)",
+"First working question-answer loop in a notebook"],o:"RAG prototype that answers from your documents"},
+{t:"Project 1: RAG with real evaluation",d:"Nov 2–8",k:[
+"Write 30 test questions with expected answers",
+"Compare chunk sizes, hybrid search and a reranker. Record the scores",
+"Wrap it in FastAPI with a simple UI (Streamlit or Gradio)",
+"Dockerize it so it runs with one command",
+"README: architecture diagram, results table, demo GIF"],o:"Project 1 on GitHub with an evaluation table",n:"This table is what will set you apart from other juniors."},
+{t:"Agentic track: SDK and CrewAI",d:"Nov 9–15",k:[
+"Ed Donner Agentic: weeks 1–2 (OpenAI Agents SDK, CrewAI)",
+"Do every exercise yourself. Do not only watch",
+"Rewrite your CV around projects, not courses",
+"Update LinkedIn, post your Project 1 write-up",
+"Apply to your first 10 junior and intern roles"],o:"CV, LinkedIn post, first applications sent"},
+{t:"Agentic track: LangGraph",d:"Nov 16–22",k:[
+"Ed Donner Agentic: LangGraph week. This is the top priority framework",
+"Build a stateful graph with tool calls and a human approval step",
+"Plan Project 2: pick a real workflow to automate",
+"Add 3 more applications and 2 messages to people at companies"],o:"LangGraph prototype running"},
+{t:"Project 2: tool-using agent",d:"Nov 23–29",k:[
+"Ed Donner Agentic: AutoGen and project weeks (skim AutoGen, focus on building)",
+"Build Project 2 with real tools: database, search, email or files",
+"Add basic guardrails: input checks, tool permissions, error handling",
+"Log runs so you can see what the agent did"],o:"Project 2 working locally"},
+{t:"MCP and finishing Project 2",d:"Nov 30–Dec 6",k:[
+"Ed Donner Agentic: MCP week. Build one MCP server of your own",
+"Connect Project 2 to it",
+"Write the Project 2 README with a short demo video",
+"Start linear algebra and probability: 2–3 h this week (for your MS)",
+"Apply to 10 more roles"],o:"Project 2 on GitHub with a demo video"},
+{t:"Production Track: AWS platform",d:"Dec 7–13",k:[
+"Production Track: AI Platform Engineering week (Bedrock, Lambda, API Gateway, Terraform, CI/CD)",
+"Create an AWS account and set a budget alert before anything else",
+"Deploy one small LLM endpoint with Lambda and API Gateway",
+"Add GitHub Actions: tests on every push, deploy on merge",
+"Learn Terraform basics by deploying the same endpoint as code"],o:"One AI endpoint live on AWS, deployed by CI/CD",n:"Skip week 1 (Next.js, Clerk) and week 3 (Azure, GCP) for now. Go deep on one cloud, AWS."},
+{t:"Production Track: agents in production",d:"Dec 14–20",k:[
+"Production Track: multi-agent system on AWS (Lambda, SQS, Aurora Serverless)",
+"Add LangFuse tracing so every agent run is visible",
+"Deploy Project 3: your best project, live with a public demo link",
+"Add cost and latency notes to the README",
+"Know how to explain: CI/CD, observability, cost control, secrets handling"],o:"Project 3 deployed with tracing",n:"If AWS billing blocks you (international card), use Render or Railway for deployment and keep the same CI/CD ideas."},
+{t:"Polish and interview prep",d:"Dec 21–27",k:[
+"Clean all three READMEs: diagram, results, how to run, live link",
+"Pin your three repos on GitHub",
+"Prepare answers: RAG pipeline, chunking trade-offs, hallucination, evaluation",
+"Do 3 mock interviews, with a friend or by recording yourself",
+"Practise a 5-minute walkthrough of each project"],o:"Portfolio ready to show anyone"},
+{t:"Apply hard",d:"Dec 28–Jan 3",k:[
+"Apply to 5–10 roles every day (LinkedIn, Rozee, Mustakbil, company sites)",
+"Include internships and contract roles. They also help your MS application",
+"Message a person at each company with a short project link",
+"Track every application in a simple sheet",
+"Plan Jan–Mar: computer vision courses, then ROS2 for robotics"],o:"50+ applications sent and a plan for what is next"}
+];
+var KEY="ai-roadmap-v1",S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){S={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var total=0;W.forEach(function(w){total+=w.k.length});
+function weekNow(){var s=new Date(2026,9,12),n=Math.floor((new Date()-s)/6048e5);return Math.max(0,Math.min(11,n))}
+function render(){
+ var cur=weekNow(),h="",done=0;
+ W.forEach(function(w,i){
+  var c=0;w.k.forEach(function(_,j){if(S[i+"-"+j])c++});done+=c;
+  h+='<details'+(i===cur?' open':'')+'><summary><span class="wk">W'+(i+1)+'</span><span class="tt">'+w.t+'<small>'+w.d+'</small></span><span class="cnt">'+c+'/'+w.k.length+'</span></summary><div class="body">';
+  w.k.forEach(function(t,j){var id=i+"-"+j,on=S[id];
+   h+='<label class="'+(on?'done':'')+'"><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+'><span>'+t+'</span></label>'});
+  h+='<div class="out"><b>Deliverable:</b> '+w.o+'</div>'+(w.n?'<div class="note">'+w.n+'</div>':'')+'</div></details>';
+ });
+ var opened=[].map.call(document.querySelectorAll("details"),function(d){return d.open});
+ document.getElementById("weeks").innerHTML=h;
+ if(opened.length)[].forEach.call(document.querySelectorAll("details"),function(d,i){d.open=opened[i]});
+ var p=Math.round(done/total*100);
+ document.getElementById("fill").style.width=p+"%";
+ document.getElementById("pct").textContent=p+"% done";
+ document.getElementById("num").textContent=done+" of "+total+" tasks";
+}
+document.getElementById("weeks").addEventListener("change",function(e){
+ var id=e.target.getAttribute("data-id");if(!id)return;
+ if(e.target.checked)S[id]=1;else delete S[id];save();render()});
+document.getElementById("reset").onclick=function(){if(confirm("Clear all ticks?")){S={};save();render()}};
+render();
+</script>
+</body>
+</html>
